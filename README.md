@@ -2,7 +2,7 @@
 
 Some scripts to simplify setting up a Unity build.
 
-### Create a new config
+### Usage
 
 - Open your Unity Project
 - Import this package: Windows -> PackageManager -> +▾ -> "Import package from git url..."
