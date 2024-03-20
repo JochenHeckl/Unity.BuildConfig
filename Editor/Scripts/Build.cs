@@ -18,10 +18,11 @@ namespace BuildConfig
 
             var buildOptions = new BuildPlayerOptions
             {
-                assetBundleManifestPath = Path.Combine(
-                    ProjectPath.FullName,
-                    buildConfig.assetBundleManifestPath
-                ),
+                assetBundleManifestPath =
+                    buildConfig.assetBundleManifestPath != null
+                        ? Path.Combine(ProjectPath.FullName, buildConfig.assetBundleManifestPath)
+                        : null,
+
                 extraScriptingDefines = buildConfig.extraScriptingDefines,
                 locationPathName = Path.Combine(ProjectPath.FullName, buildConfig.outputDirectory),
                 options = buildConfig.buildOptions,
@@ -30,6 +31,8 @@ namespace BuildConfig
                 target = buildConfig.target,
                 targetGroup = buildConfig.targetGroup
             };
+
+            Log.Info("Building {Target} ...", buildOptions.locationPathName);
 
             var buildReport = BuildPipeline.BuildPlayer(buildOptions);
             Log.Info("BuildResult: {BuildResult}", buildReport.summary.result);
